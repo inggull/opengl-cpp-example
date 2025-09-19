@@ -11,6 +11,14 @@ cmake --build build
 
 ## Run
 
+### GNU
+
 ```bash
+build/bin/<PROJECT_NAME>
+```
+
+### MSVC
+
+```shell
 build/bin/<BUILD_TYPE>/<PROJECT_NAME>
 ```
