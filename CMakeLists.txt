@@ -15,6 +15,7 @@ project(
     HOMEPAGE_URL https://github.com/inggull/opengl-c++-example.git
     DESCRIPTION "An OpenGL C++ Example"
 )
+
 message("[Compiler]")
 message(" - Path : ${CMAKE_CXX_COMPILER}")
 message(" - ID : ${CMAKE_CXX_COMPILER_ID}")
