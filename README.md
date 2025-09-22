@@ -4,7 +4,7 @@ C++로 작성한 OpenGL 예제입니다.
 
 ## Build
 
-```bash
+```shell
 cmake -B build
 cmake --build build
 ```
@@ -13,7 +13,7 @@ cmake --build build
 
 ### GNU
 
-```bash
+```shell
 build/bin/<PROJECT_NAME>
 ```
 
