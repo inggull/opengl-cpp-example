@@ -2,6 +2,10 @@
 
 C++로 작성한 OpenGL 예제입니다.  
 
+## Prerequisite
+
+`C++23`에서 추가된 모듈인 `std::expected`를 지원하는 컴파일러 버전이 필요합니다.
+
 ## Build
 
 ```shell
