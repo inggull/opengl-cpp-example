@@ -1,5 +1,5 @@
 project(
-    hello_window
+    program
     LANGUAGES CXX
     VERSION 0.1.0
     HOMEPAGE_URL https://github.com/inggull/opengl-cpp-example.git

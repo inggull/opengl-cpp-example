@@ -1,7 +1,7 @@
 #ifndef __SHADER_HH__
 #define __SHADER_HH__
 
-#include <02_shader/include/common.hh>
+#include <03_program/include/common.hh>
 
 class Shader {
 public:

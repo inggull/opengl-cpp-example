@@ -1,4 +1,4 @@
-#include <02_shader/include/Shader.hh>
+#include <03_program/include/Shader.hh>
 
 std::expected<std::unique_ptr<Shader>, std::string> Shader::create(const std::string& file_path, GLenum shader_type) {
     // Load shader file

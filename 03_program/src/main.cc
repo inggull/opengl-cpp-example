@@ -1,10 +1,11 @@
 #include <spdlog/spdlog.h>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <02_shader/include/common.hh>
-#include <02_shader/include/Shader.hh>
+#include <03_program/include/common.hh>
+#include <Shader.hh>
+#include <Program.hh>
 
-#define WINDOW_NAME "Shader"
+#define WINDOW_NAME "Program"
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
@@ -45,18 +46,25 @@ int main() {
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  // State-setting function
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);  // State-setting function
 
-    auto vertex_shader = Shader::create("shader/simple.vert", GL_VERTEX_SHADER);
+    std::expected<std::shared_ptr<Shader>, std::string> vertex_shader = Shader::create("shader/simple.vert", GL_VERTEX_SHADER);
     if (vertex_shader.has_value() == false) {
         SPDLOG_ERROR(vertex_shader.error());
         return -1;
     }
-    auto fragment_shader = Shader::create("shader/simple.frag", GL_FRAGMENT_SHADER);
+    std::expected<std::shared_ptr<Shader>, std::string> fragment_shader = Shader::create("shader/simple.frag", GL_FRAGMENT_SHADER);
     if (fragment_shader.has_value() == false) {
         SPDLOG_ERROR(fragment_shader.error());
         return -1;
     }
     SPDLOG_INFO("Create vertex shader({})", vertex_shader.value()->get());
     SPDLOG_INFO("Create fragment shader({})", fragment_shader.value()->get());
+
+    auto program = Program::create({vertex_shader.value(), fragment_shader.value()});
+    if (program.has_value() == false) {
+        SPDLOG_ERROR(program.error());
+        return -1;
+    }
+    SPDLOG_INFO("Create program({})", program.value()->get());
 
     glfwSetFramebufferSizeCallback(window, onFramebufferSizeEvent);
     glfwSetKeyCallback(window, onKeyEvent);

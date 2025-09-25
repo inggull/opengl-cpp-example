@@ -1,4 +1,4 @@
-#include <02_shader/include/common.hh>
+#include <03_program/include/common.hh>
 
 std::expected<std::string, std::string> load_file(const std::string &file_path) {
     std::ifstream file(file_path, std::ios::binary);

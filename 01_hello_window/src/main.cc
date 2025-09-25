@@ -1,4 +1,4 @@
-#include <common.hh>
+#include <01_hello_window/include/common.hh>
 
 #define WINDOW_NAME "Hello, window!"
 #define WINDOW_WIDTH 640
