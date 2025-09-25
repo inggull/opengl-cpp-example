@@ -20,13 +20,13 @@ std::expected<std::unique_ptr<Context>, std::string> Context::create() {
         -0.5, -0.5, 0.0, 0.0, 1.0, 0.0,
         0.5, -0.5, 0.0, 0.0, 0.0, 1.0,
     };
-    uint32_t indices[3] = {
+    GLuint indices[3] = {
         0, 1, 2,
     };
 
-    uint32_t vao{0};
-    uint32_t vbo{0};
-    uint32_t ebo{0};
+    GLuint vao{0};
+    GLuint vbo{0};
+    GLuint ebo{0};
 
     // 사용할 vao를 먼저 바인딩 해줘야 나머지 오르젝트들이 vao에 저장된다
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // State-setting function
@@ -46,7 +46,7 @@ std::expected<std::unique_ptr<Context>, std::string> Context::create() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void*>(sizeof(float) * 0)); // vao의 속성 0번에 해당하는 vbo 데이터를 전달
     // 속성 1번: color
     glEnableVertexAttribArray(1);  // vao의 1번 속성을 활성화
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void *>(sizeof(float) * 3)); // vao의 속성 1번에 해당하는 vbo 데이터를 전달
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void*>(sizeof(float) * 3)); // vao의 속성 1번에 해당하는 vbo 데이터를 전달
 
     glGenBuffers(1, &ebo);  // 새로운 ebo를 생성
     SPDLOG_INFO("Created element buffer({})", ebo);
@@ -58,11 +58,11 @@ std::expected<std::unique_ptr<Context>, std::string> Context::create() {
 
 void Context::render() const {
     glClear(GL_COLOR_BUFFER_BIT); // State-using function
-    program->use();
+    program->use(); // 사용할 프로그램을 지정
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 }
 
-Context::Context(std::unique_ptr<Program> program, uint32_t vao, uint32_t vbo, uint32_t ebo) : program(move(program)), vao(vao), vbo(vbo), ebo(ebo) {}
+Context::Context(std::unique_ptr<Program> program, GLuint vao, GLuint vbo, GLuint ebo) : program(move(program)), vao(vao), vbo(vbo), ebo(ebo) {}
 
 Context::~Context() {
     glDeleteVertexArrays(1, &vao);

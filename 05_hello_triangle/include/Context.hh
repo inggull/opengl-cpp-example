@@ -12,11 +12,11 @@ public:
     ~Context();
 
 private:
-    Context(std::unique_ptr<Program> program, uint32_t vao, uint32_t vbo, uint32_t ebo);
+    Context(std::unique_ptr<Program> program, GLuint vao, GLuint vbo, GLuint ebo);
     std::unique_ptr<Program> program;
-    uint32_t vao;
-    uint32_t vbo;
-    uint32_t ebo;
+    GLuint vao;
+    GLuint vbo;
+    GLuint ebo;
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class Shader {
 public:
-    static std::expected<std::unique_ptr<Shader>, std::string> create(const std::string& file_path, GLenum shader_type);
+    static std::expected<std::unique_ptr<Shader>, std::string> create(const std::string &file_path, GLenum type);
     GLuint get() const;
     ~Shader();
 

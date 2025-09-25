@@ -1,7 +1,7 @@
 #include <Context.hh>
 
 std::expected<std::unique_ptr<Context>, std::string> Context::create() {
-    uint32_t vao{0};
+    GLuint vao{0};
 
     std::expected<std::shared_ptr<Shader>, std::string> vertex_shader = Shader::create("shader/simple.vert", GL_VERTEX_SHADER);
     if (vertex_shader.has_value() == false)
@@ -36,7 +36,7 @@ void Context::render() const {
     glDrawArrays(GL_POINTS, 0, 1);
 }
 
-Context::Context(std::unique_ptr<Program> program, uint32_t vao) : program(move(program)), vao(vao) {}
+Context::Context(std::unique_ptr<Program> program, GLuint vao) : program(move(program)), vao(vao) {}
 
 Context::~Context() {
     glDeleteVertexArrays(1, &vao);
