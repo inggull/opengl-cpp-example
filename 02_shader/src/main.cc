@@ -1,8 +1,8 @@
 #include <spdlog/spdlog.h>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <02_shader/include/common.hh>
-#include <02_shader/include/Shader.hh>
+#include <common.hh>
+#include <Shader.hh>
 
 #define WINDOW_NAME "Shader"
 #define WINDOW_WIDTH 640
@@ -42,8 +42,8 @@ int main() {
     }
     auto gl_version = glGetString(GL_VERSION);
     SPDLOG_INFO("Loaded OpenGL {}", reinterpret_cast<const char*>(gl_version));
-    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  // State-setting function
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);  // State-setting function
+    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT); // State-setting function
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // State-setting function
 
     auto vertex_shader = Shader::create("shader/simple.vert", GL_VERTEX_SHADER);
     if (vertex_shader.has_value() == false) {
@@ -55,8 +55,8 @@ int main() {
         SPDLOG_ERROR(fragment_shader.error());
         return -1;
     }
-    SPDLOG_INFO("Create vertex shader({})", vertex_shader.value()->get());
-    SPDLOG_INFO("Create fragment shader({})", fragment_shader.value()->get());
+    SPDLOG_INFO("Created vertex shader({})", vertex_shader.value()->get());
+    SPDLOG_INFO("Created fragment shader({})", fragment_shader.value()->get());
 
     glfwSetFramebufferSizeCallback(window, onFramebufferSizeEvent);
     glfwSetKeyCallback(window, onKeyEvent);
@@ -65,7 +65,7 @@ int main() {
     SPDLOG_INFO("Start main loop");
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        glClear(GL_COLOR_BUFFER_BIT);  // State-using function
+        glClear(GL_COLOR_BUFFER_BIT); // State-using function
         glfwSwapBuffers(window);
     }
 

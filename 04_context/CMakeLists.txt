@@ -1,5 +1,5 @@
 project(
-    shader
+    context
     LANGUAGES CXX
     VERSION 0.1.0
     HOMEPAGE_URL https://github.com/inggull/opengl-cpp-example.git
@@ -26,7 +26,7 @@ endforeach()
 add_executable(${PROJECT_NAME} ${SRCS})
 add_dependencies(${PROJECT_NAME} ${DEPS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/glad/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/glad/include)
 foreach(DEP ${DEPS})
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/${DEP}-src/include)
 endforeach()

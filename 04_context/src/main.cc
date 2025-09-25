@@ -4,8 +4,9 @@
 #include <common.hh>
 #include <Shader.hh>
 #include <Program.hh>
+#include <Context.hh>
 
-#define WINDOW_NAME "Program"
+#define WINDOW_NAME "Context"
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
@@ -44,36 +45,21 @@ int main() {
     auto gl_version = glGetString(GL_VERSION);
     SPDLOG_INFO("Loaded OpenGL {}", reinterpret_cast<const char*>(gl_version));
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT); // State-setting function
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // State-setting function
-
-    std::expected<std::shared_ptr<Shader>, std::string> vertex_shader = Shader::create("shader/simple.vert", GL_VERTEX_SHADER);
-    if (vertex_shader.has_value() == false) {
-        SPDLOG_ERROR(vertex_shader.error());
-        return -1;
-    }
-    std::expected<std::shared_ptr<Shader>, std::string> fragment_shader = Shader::create("shader/simple.frag", GL_FRAGMENT_SHADER);
-    if (fragment_shader.has_value() == false) {
-        SPDLOG_ERROR(fragment_shader.error());
-        return -1;
-    }
-    SPDLOG_INFO("Created vertex shader({})", vertex_shader.value()->get());
-    SPDLOG_INFO("Created fragment shader({})", fragment_shader.value()->get());
-
-    auto program = Program::create({vertex_shader.value(), fragment_shader.value()});
-    if (program.has_value() == false) {
-        SPDLOG_ERROR(program.error());
-        return -1;
-    }
-    SPDLOG_INFO("Created program({})", program.value()->get());
 
     glfwSetFramebufferSizeCallback(window, onFramebufferSizeEvent);
     glfwSetKeyCallback(window, onKeyEvent);
+
+    auto context = Context::create();
+    if (context.has_value() == false) {
+        SPDLOG_ERROR(context.error());
+        return -1;
+    }
 
     // Strat main loop
     SPDLOG_INFO("Start main loop");
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        glClear(GL_COLOR_BUFFER_BIT); // State-using function
+        context.value()->render();
         glfwSwapBuffers(window);
     }
 

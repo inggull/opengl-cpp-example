@@ -1,4 +1,4 @@
-#include <01_hello_window/include/common.hh>
+#include <common.hh>
 
 #define WINDOW_NAME "Hello, window!"
 #define WINDOW_WIDTH 640
@@ -38,8 +38,8 @@ int main() {
     }
     auto gl_version = glGetString(GL_VERSION);
     SPDLOG_INFO("Loaded OpenGL {}", reinterpret_cast<const char*>(gl_version));
-    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  // State-setting function
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);  // State-setting function
+    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT); // State-setting function
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // State-setting function
 
     glfwSetFramebufferSizeCallback(window, onFramebufferSizeEvent);
     glfwSetKeyCallback(window, onKeyEvent);
@@ -48,7 +48,7 @@ int main() {
     SPDLOG_INFO("Start main loop");
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        glClear(GL_COLOR_BUFFER_BIT);  // State-using function
+        glClear(GL_COLOR_BUFFER_BIT); // State-using function
         glfwSwapBuffers(window);
     }
 
