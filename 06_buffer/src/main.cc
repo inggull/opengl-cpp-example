@@ -1,6 +1,3 @@
-#include <spdlog/spdlog.h>
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
 #include <common.hh>
 #include <Shader.hh>
 #include <Program.hh>
@@ -10,8 +7,8 @@
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
-void onFramebufferSizeEvent(GLFWwindow* window, int width, int height);
-void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods);
+void onFramebufferSizeEvent(GLFWwindow *window, int width, int height);
+void onKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 int main() {
     // Initialize glfw
@@ -63,16 +60,19 @@ int main() {
         glfwSwapBuffers(window);
     }
 
+
+    // 소멸자 호출
+    context.value().reset();
     glfwTerminate();
     return 0;
 }
 
-void onFramebufferSizeEvent(GLFWwindow* window, int width, int height) {
+void onFramebufferSizeEvent(GLFWwindow *window, int width, int height) {
     SPDLOG_INFO("FramebufferSize changed: {} x {}", width, height);
     glViewport(0, 0, width, height);
 }
 
-void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void onKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods) {
     SPDLOG_INFO("key: {}, scancode: {}, action: {}, mods: {}{}{}",
         key, scancode,
         action == GLFW_PRESS ? "Press" :

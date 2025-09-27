@@ -6,7 +6,7 @@
 
 class Program {
 public:
-    static std::expected<std::unique_ptr<Program>, std::string> create(const std::vector<std::shared_ptr<Shader>>& shaders);
+    static std::expected<std::unique_ptr<Program>, std::string> create(const std::vector<std::shared_ptr<Shader>> &shaders);
     GLuint get() const;
     void use() const;
     ~Program();
@@ -16,4 +16,4 @@ private:
     GLuint program;
 };
 
-#endif
+#endif // __PROGRAM_HH__

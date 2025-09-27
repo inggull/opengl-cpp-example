@@ -17,4 +17,4 @@ private:
     GLuint vao;
 };
 
-#endif
+#endif // __CONTEXT_HH__

@@ -1,8 +1,11 @@
 #include <common.hh>
+#include <Shader.hh>
+#include <Program.hh>
+#include <Context.hh>
 
-#define WINDOW_NAME "Hello, window!"
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_NAME "Texture"
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 1024
 
 void onFramebufferSizeEvent(GLFWwindow *window, int width, int height);
 void onKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -39,19 +42,27 @@ int main() {
     auto gl_version = glGetString(GL_VERSION);
     SPDLOG_INFO("Loaded OpenGL {}", reinterpret_cast<const char*>(gl_version));
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT); // State-setting function
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // State-setting function
 
     glfwSetFramebufferSizeCallback(window, onFramebufferSizeEvent);
     glfwSetKeyCallback(window, onKeyEvent);
+
+    auto context = Context::create();
+    if (context.has_value() == false) {
+        SPDLOG_ERROR(context.error());
+        return -1;
+    }
 
     // Strat main loop
     SPDLOG_INFO("Start main loop");
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        glClear(GL_COLOR_BUFFER_BIT); // State-using function
+        context.value()->render();
         glfwSwapBuffers(window);
     }
 
+
+    // 소멸자 호출
+    context.value().reset();
     glfwTerminate();
     return 0;
 }

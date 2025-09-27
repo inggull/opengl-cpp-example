@@ -12,4 +12,4 @@
 
 std::expected<std::string, std::string> load_file(const std::string &file_path);
 
-#endif
+#endif // __COMMON_HH__

@@ -16,9 +16,9 @@ std::expected<std::unique_ptr<Context>, std::string> Context::create() {
     SPDLOG_INFO("Created program({})", program.value()->get());
 
     float vertices[18] = {
-        0.0, 0.5, 0.0, 1.0, 0.0, 0.0,
-        -0.5, -0.5, 0.0, 0.0, 1.0, 0.0,
-        0.5, -0.5, 0.0, 0.0, 0.0, 1.0,
+        0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
     };
     GLuint indices[3] = {
         0, 1, 2,
@@ -43,10 +43,10 @@ std::expected<std::unique_ptr<Context>, std::string> Context::create() {
     // 초기에 `VertexAttribPointer`의 포인터는 각 버택스 버퍼에 바인딩된 배열의 시작 주소를 가리켰지만, vao가 등장하면서 vao가 가리키는 배열의 오프셋을 의미하게 되었다
     // 속성 0번: position
     glEnableVertexAttribArray(0);  // vao의 0번 속성을 활성화
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void*>(sizeof(float) * 0)); // vao의 속성 0번에 해당하는 vbo 데이터를 전달
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void *>(sizeof(float) * 0)); // vao의 속성 0번에 해당하는 vbo 데이터를 전달
     // 속성 1번: color
     glEnableVertexAttribArray(1);  // vao의 1번 속성을 활성화
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void*>(sizeof(float) * 3)); // vao의 속성 1번에 해당하는 vbo 데이터를 전달
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, reinterpret_cast<const void *>(sizeof(float) * 3)); // vao의 속성 1번에 해당하는 vbo 데이터를 전달
 
     glGenBuffers(1, &ebo);  // 새로운 ebo를 생성
     SPDLOG_INFO("Created element buffer({})", ebo);

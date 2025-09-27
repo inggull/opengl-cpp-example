@@ -1,6 +1,6 @@
 #include <Program.hh>
 
-std::expected<std::unique_ptr<Program>, std::string> Program::create(const std::vector<std::shared_ptr<Shader>>& shaders) {
+std::expected<std::unique_ptr<Program>, std::string> Program::create(const std::vector<std::shared_ptr<Shader>> &shaders) {
     GLuint program = glCreateProgram();
     for (auto shader: shaders)
         glAttachShader(program, shader->get());

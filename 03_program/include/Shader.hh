@@ -14,4 +14,4 @@ private:
     GLuint shader;
 };
 
-#endif
+#endif // __SHADER_HH__

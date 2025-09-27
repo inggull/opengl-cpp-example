@@ -19,4 +19,4 @@ private:
     GLuint ebo;
 };
 
-#endif
+#endif // __CONTEXT_HH__
