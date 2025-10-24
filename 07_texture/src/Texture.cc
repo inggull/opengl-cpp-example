@@ -23,7 +23,7 @@ void Texture::bind() {
 }
 
 Texture::~Texture() {
-    glDeleteBuffers(1, &texture);
+    glDeleteTextures(1, &texture);
     SPDLOG_INFO("Dropped texture({})", texture);
 }
 
